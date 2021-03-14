@@ -8,14 +8,22 @@ import os
 # ftpServer = os.getenv('FTP_SERVER_URL')
 # ftpServerUsername=os.getenv('FTP_SERVER_USERNAME')
 # ftpServerPassword=os.getenv('FTP_SERVER_PASSWORD')
+
 id = os.getenv('DATA_LOGGER_ID')
 dataLoggerToken = os.getenv('DATA_LOGGER_TOKEN')
 
-def upload_data(data):
-    # we'll have to convert the data to a list of dataUnits first
-    dataUnit = DataUnit(period=0, measurement=0, timestamp='2019-08-24T14:15:22Z')
-    channel = Channel(name='Viscosity', unit='pascal-second', dataUnits=[dataUnit])
-    device = Device(model='elm1', serialNo='1', channels=[channel])
+def upload_data(sensorData, measurementPeriod):
+    channels = [
+        Channel(name='Viscosity', unit=sensorData.getViscosityUnit()),
+        Channel(name='Temperature', unit=sensorData.getTemperatureUnit()),
+    ]
+    device = Device(model=sensorData.getModelName(), serialNo=sensorData.getSerialNo(), channels=channels)
+
+    for dataRow in sensorData.getData().values():
+        dataUnitViscosity = DataUnit(period=measurementPeriod, measurement=dataRow.getViscosity(), timestamp=dataRow.getTimestamp())
+        dataUnitTemperature = DataUnit(period=measurementPeriod, measurement=dataRow.getTemperature(), timestamp=dataRow.getTimestamp())
+        channels[0].addDataUnit(dataUnitViscosity)
+        channels[1].addDataUnit(dataUnitTemperature)
 
     dataLogger = DataLogger(id=id, dataLoggerToken=dataLoggerToken)
-    dataLogger.withManufacturer('Elmira').withDevices([device]).postData()
+    dataLogger.withManufacturer(sensorData.getManufacturer()).withDevices([device]).postData()

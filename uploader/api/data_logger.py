@@ -1,4 +1,5 @@
 import requests
+from requests import RequestException, HTTPError
 
 class DataLogger():
 
@@ -25,6 +26,11 @@ class DataLogger():
             url = "https://atman-iot.com/api/data-logger/data/id/{}/token/{}".format(self.id, self.dataLoggerToken)
             json = self.asDict()
             response = requests.post(url, json=json)
-            print(response)
-        except Exception as e:
-            print(e)
+            response.raise_for_status()
+        
+        except HTTPError as e:
+            # log this first then rethrow
+            raise e
+        except RequestException as e:
+            # log this first then rethrow
+            raise e

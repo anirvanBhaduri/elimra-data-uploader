@@ -1,6 +1,10 @@
 import csv
+from datetime import datetime
 
 from .csv_reader_interface import CSVReaderInterface
+from .data_row import DataRow
+
+TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 class CSVReader(CSVReaderInterface):
     def __init__(self, filename):
@@ -47,17 +51,50 @@ class CSVReader(CSVReaderInterface):
         self.fields.append(self.rows[4][2])
         return self
 
-    def extractSensorData(self):
+    def extractSensorData(self, fromTimestamp=None):
         dataRows = self.rows[6:]
 
-        for row in dataRows:
-            self.rowDict['data'][row[0]] = {
-                'timestamp': row[0],
-                'viscosity': row[1],
-                'temperature': row[2],
-            }
+        if not fromTimestamp:
+            for row in dataRows:
+                currentTime = datetime.strptime(row[0], TIMESTAMP_FORMAT)
+                self.rowDict['data'][row[0]] = DataRow(
+                    currentTime.strftime('%Y-%m-%dT%H:%M:%SZ'),
+                    row[1],
+                    row[2],
+                )
+            return self
+
+        fromDatetime = datetime.strptime(fromTimestamp, TIMESTAMP_FORMAT)
+        for row in dataRows:    
+            currentTime = datetime.strptime(row[0], TIMESTAMP_FORMAT)
+            if currentTime > fromDatetime:
+                self.rowDict['data'][row[0]] = DataRow(
+                    currentTime.strftime('%Y-%m-%dT%H:%M:%SZ'),
+                    row[1],
+                    row[2],
+                )
 
         return self
     
     def getData(self):
         return self.rowDict['data']
+
+    def getLatestTimestamp(self):
+        timestamps = self.rowDict['data'].keys()
+        timestampsInDatetime = [datetime.strptime(timestamp, TIMESTAMP_FORMAT) for timestamp in timestamps]
+        return max(timestampsInDatetime)
+
+    def getViscosityUnit(self):
+        return self.rowDict['viscosity_units']
+    
+    def getTemperatureUnit(self):
+        return self.rowDict['temperature_units']
+
+    def getModelName(self):
+        return self.rowDict['modelName']
+    
+    def getSerialNo(self):
+        return self.rowDict['uniqueSerialNo']
+    
+    def getManufacturer(self):
+        return self.rowDict['manufacturer']

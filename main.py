@@ -8,14 +8,15 @@ import extractor
 import uploader
 
 def main_loop():
-    numberOfRows = 0
+    lastTimestamp = None
+    measurementPeriod = int(os.getenv('LOOP_FREQUENCY_IN_SECONDS'))
 
     #while True:
         # run the extractor then the uploader
-    csvReader = extractor.extract_data_from_csv(os.getenv('CSV_FILENAME'))
-    uploader.upload_data(csvReader)
+    csvData, lastTimestamp = extractor.extract_data_from_csv(os.getenv('CSV_FILENAME'), lastTimestamp)
+    uploader.upload_data(csvData, measurementPeriod=measurementPeriod)
 
-    time.sleep(int(os.getenv('LOOP_FREQUENCY_IN_SECONDS')))
+    time.sleep(measurementPeriod)
 
 if __name__ == '__main__':
     main_loop()
