@@ -12,14 +12,8 @@ def main_loop():
 
     #while True:
         # run the extractor then the uploader
-    newData = extractor.extract_data_from_csv(os.getenv('CSV_FILENAME'))
-    relevantData = []
-
-    if (numberOfRows < len(newData)):
-        relevantData = newData[numberOfRows - len(newData): len(newData)]
-        
-        numberOfRows = len(newData)
-        uploader.upload_data(relevantData)
+    csvReader = extractor.extract_data_from_csv(os.getenv('CSV_FILENAME'))
+    uploader.upload_data(csvReader)
 
     time.sleep(int(os.getenv('LOOP_FREQUENCY_IN_SECONDS')))
 
