@@ -80,6 +80,7 @@ In order to run this application, you must first download the following:
 * python
   Please download the following version of Python - `Python 3.9.1 amd 64` (Windows)
   Here is the link: `https://www.python.org/ftp/python/3.9.1/python-3.9.1-amd64.exe`
+  And then execute the downloaded file.
 
 * pip
   To install this, please type the following commands in the command line: (Windows)
@@ -89,9 +90,13 @@ In order to run this application, you must first download the following:
   ```
 
 * virtualenv
-  This can now be installed using pip with the following command:
+  Now you must navigate to where pip is installed by using the following command:
   ```sh
-  pip install virtualenv
+  cd {The path where pip was installed}
+  ```
+  and then run the following command:
+  ```sh
+  .\pip.exe install virtualenv
   ```
 
 
@@ -101,24 +106,10 @@ In order to run this application, you must first download the following:
    ```sh
    git clone git@github.com:anirvanBhaduri/elimra-data-uploader.git 
    ```
-2. Go to the cloned repo and create the virtual env
-   ```sh
-   virtualenv .virtualenv
-   ```
-3. Activate the virtual env
-   (windows)
-   ```sh
-   .\.virtualenv\Scripts\activate
-   ```
-4. Copy the env sample file to create the actual env file
-   ```sh
-   cp .env.sample .env
-   ```
-5. Populate the .env file with the correct values
-6. Run the application
-   ```sh
-   py main.py
-   ```
+2. Open a file explorer and navigate to the folder which you just downloaded (elimra-data-uploader). Then run the `Setup.bat` file by double-clicking it.
+3. Step 2 will have created a `.env` file. Open this file with some editor and change the values within to appropriate values. The values inside this file
+   will determine if the application runs correctly.
+6. Once you have correctly populated the `.env` file, double-click the `Run.bat` file. This will run the application.
 7. To see logs, go to `logger/logs`.
 
 
