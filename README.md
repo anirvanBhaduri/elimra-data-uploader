@@ -23,7 +23,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="1294" height="606">
+    <img src="images/logo.png" alt="Logo" width="657" height="303">
   </a>
 
   <h3 align="center">Elmira Data Uploader</h3>
