@@ -5,11 +5,6 @@ from logger import logger
 
 import os
 
-# deprecated
-# ftpServer = os.getenv('FTP_SERVER_URL')
-# ftpServerUsername=os.getenv('FTP_SERVER_USERNAME')
-# ftpServerPassword=os.getenv('FTP_SERVER_PASSWORD')
-
 id = os.getenv('DATA_LOGGER_ID')
 dataLoggerToken = os.getenv('DATA_LOGGER_TOKEN')
 
