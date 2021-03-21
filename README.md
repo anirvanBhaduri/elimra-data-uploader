@@ -78,17 +78,26 @@ The following section contains information about how to install this software.
 In order to run this application, you must first download the following:
 
 * python
-  TBA - need to get the exact exe used to install on the atom
+  Please download the following version of Python - `Python 3.9.1 amd 64` (Windows)
+  Here is the link: `https://www.python.org/ftp/python/3.9.1/python-3.9.1-amd64.exe`
 
 * pip
-  This can be installed using python - here I will document how I set it up on the atom
+  To install this, please type the following commands in the command line: (Windows)
+  ```sh
+  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+  py get-pip.py
+  ```
 
 * virtualenv
-  This can be installed using python - will again explain how
+  This can now be installed using pip with the following command:
+  ```sh
+  pip install virtualenv
+  ```
+
 
 ### Installation
 
-1. Clone the repo
+1. Download the repo as a zip file or clone it using the below command. If you download it as a zip, you need to unzip it somewhere.
    ```sh
    git clone git@github.com:anirvanBhaduri/elimra-data-uploader.git 
    ```
