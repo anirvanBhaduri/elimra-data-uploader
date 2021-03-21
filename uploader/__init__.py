@@ -15,8 +15,8 @@ dataLoggerToken = os.getenv('DATA_LOGGER_TOKEN')
 
 def upload_data(sensorData, measurementPeriod):
     channels = [
-        Channel(name='Viscosity', unit=sensorData.getViscosityUnit(), dataUnits=[]),
-        Channel(name='Temperature', unit=sensorData.getTemperatureUnit(), dataUnits=[]),
+        Channel(name=sensorData.fields[0], unit=sensorData.getViscosityUnit(), dataUnits=[]),
+        Channel(name=sensorData.fields[1], unit=sensorData.getTemperatureUnit(), dataUnits=[]),
     ]
     device = Device(model=sensorData.getModelName(), serialNo=sensorData.getSerialNo(), channels=channels)
 
