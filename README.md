@@ -109,8 +109,8 @@ In order to run this application, you must first download the following:
 2. Open a file explorer and navigate to the folder which you just downloaded (elimra-data-uploader). Then run the `Setup.bat` file by double-clicking it.
 3. Step 2 will have created a `.env` file. Open this file with some editor and change the values within to appropriate values. The values inside this file
    will determine if the application runs correctly.
-6. Once you have correctly populated the `.env` file, double-click the `Run.bat` file. This will run the application.
-7. To see logs, go to `logger/logs`.
+4. Once you have correctly populated the `.env` file, double-click the `Run.bat` file. This will run the application.
+5. To see logs, go to `logger/logs`.
 
 
 
