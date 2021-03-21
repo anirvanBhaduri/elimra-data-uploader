@@ -81,8 +81,11 @@ class CSVReader(CSVReaderInterface):
 
     def getLatestTimestamp(self):
         timestamps = self.rowDict['data'].keys()
+        if not timestamps:
+            return None
+
         timestampsInDatetime = [datetime.strptime(timestamp, TIMESTAMP_FORMAT) for timestamp in timestamps]
-        return max(timestampsInDatetime)
+        return max(timestampsInDatetime).strftime(TIMESTAMP_FORMAT)
 
     def getViscosityUnit(self):
         return self.rowDict['viscosity_units']
