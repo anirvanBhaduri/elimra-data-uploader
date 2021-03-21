@@ -2,6 +2,7 @@ import requests
 from requests import RequestException, HTTPError
 
 from logger import logger
+from pprint import pformat
 
 class DataLogger():
 
@@ -28,7 +29,7 @@ class DataLogger():
             url = "https://atman-iot.com/api/data-logger/data/id/{}/token/{}".format(self.id, self.dataLoggerToken)
             json = self.asDict()
 
-            logger.info('Posting the following data to {}:\n{}'.format(url, json))
+            logger.info('Posting the following data to {}:\n{}'.format(url, pformat(json)))
             response = requests.post(url, json=json)
             response.raise_for_status()
         
