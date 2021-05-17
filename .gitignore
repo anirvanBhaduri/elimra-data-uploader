@@ -130,3 +130,6 @@ dmypy.json
 
 # logs
 logger/logs/info*
+
+# visual studio
+.vs
