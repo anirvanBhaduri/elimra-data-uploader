@@ -21,7 +21,7 @@ def main_loop():
         if newTimestamp:
             logger.info('lastTimestamp being set to: {}'.format(newTimestamp))
             lastTimestamp = newTimestamp
-        uploader.upload_data(csvData, measurementPeriod=measurementPeriod)
+        uploader.upload_data_atman(csvData, measurementPeriod=measurementPeriod)
 
         logger.debug('Sleeping for {} seconds with lastTimestamp at {}'.format(measurementPeriod, lastTimestamp))
         time.sleep(measurementPeriod)

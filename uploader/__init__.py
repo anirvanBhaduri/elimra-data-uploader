@@ -5,10 +5,10 @@ from logger import logger
 
 import os
 
-id = os.getenv('DATA_LOGGER_ID')
+dataLoggerId = os.getenv('DATA_LOGGER_ID')
 dataLoggerToken = os.getenv('DATA_LOGGER_TOKEN')
 
-def upload_data(sensorData, measurementPeriod):
+def upload_data_atman(sensorData, measurementPeriod):
     channels = [
         Channel(name=sensorData.fields[0], unit=sensorData.getViscosityUnit(), dataUnits=[]),
         Channel(name=sensorData.fields[1], unit=sensorData.getTemperatureUnit(), dataUnits=[]),
@@ -16,7 +16,7 @@ def upload_data(sensorData, measurementPeriod):
     device = Device(model=sensorData.getModelName(), serialNo=sensorData.getSerialNo(), channels=channels)
 
     if not sensorData.getData().values():
-        logger.info('Not posting any data as we have no data to post.')
+        logger.info('Not posting any data as we have no data to post. (atman)')
         return
 
     for dataRow in sensorData.getData().values():
@@ -25,6 +25,13 @@ def upload_data(sensorData, measurementPeriod):
         channels[0].addDataUnit(dataUnitViscosity)
         channels[1].addDataUnit(dataUnitTemperature)
 
-    dataLogger = DataLogger(id=id, dataLoggerToken=dataLoggerToken)
+    dataLogger = DataLogger(dataLoggerId=dataLoggerId, dataLoggerToken=dataLoggerToken)
     dataLogger.withManufacturer(sensorData.getManufacturer()).withDevices([device])
     dataLogger.postData()
+
+def upload_data_bosch(sensorData):
+    if not sensorData.getData().values():
+        logger.info('Not posting any data as we have no data to post. (bosch)')
+        return
+
+

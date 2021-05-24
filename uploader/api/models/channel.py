@@ -4,6 +4,9 @@ class Channel():
         self.unit = unit
         self.dataUnits = dataUnits
 
+    def getName(self):
+        return self.name
+
     def addDataUnit(self, dataUnit):
         self.dataUnits.append(dataUnit)
 
