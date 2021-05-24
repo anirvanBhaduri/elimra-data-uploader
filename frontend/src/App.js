@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <div className="mb-4">
-        <AtmanContainer onStart={() => console.log('start')} onStop={() => console.log('stop')} />
+        <AtmanContainer />
       </div>
       <BoschContainer />
     </div>
