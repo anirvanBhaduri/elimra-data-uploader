@@ -4,7 +4,7 @@ function RedButton(props) {
       type={props.type}
       name={props.name}
       disabled={props.disabled}
-      class="bg-red-500 hover:bg-red-700 rounded-sm px-4 py-2"
+      className="bg-red-500 hover:bg-red-700 rounded-sm px-4 py-2"
       onClick={props.onClick}
     >
       {props.text}

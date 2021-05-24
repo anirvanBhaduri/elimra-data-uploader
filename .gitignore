@@ -133,3 +133,5 @@ logger/logs/info*
 
 # visual studio
 .vs
+
+.idea
