@@ -4,12 +4,16 @@ from requests import RequestException, HTTPError
 from logger import logger
 from pprint import pformat
 
+from .bosch_auth import BoschAuth
+
 class BoschDataLogger():
 
     def __init__(self, client_id, client_secret, scope):
-        self.client_id = client_id
-        self.client_secret = client_secret
-        self.scope = scope
+        self.auth = BoschAuth(client_id, client_secret, scope)
+
+    def withNamespace(self, namespace):
+        self.namespace = namespace
+        return self
 
     def withThingName(self, thing_name):
         self.thing_name = thing_name
@@ -22,33 +26,27 @@ class BoschDataLogger():
         self.data = data
         return self
 
-    def withAuth(self):
-        pass
-
     def toDataFormat(self):
         formattedData = {}
-        for dataRow in self.data:
-                formattedData[feature.getName()] = {
-                    'properties': {
-                        'temperature': feature.,
-                        'viscosity': '',
-                        'timestamp': '',
-                    },
-                }
+        lastDataRow = self.data[-1]
 
         return {
-            self.
-            'manufacturer': self.manufacturer,
-            'devices': [ device.asDict() for device in self.devices ],
+            self.thing_feature: {
+                'properties': {
+                    'temperature': lastDataRow.getTemperature(),
+                    'viscosity': lastDataRow.getViscosity(),
+                    'timestamp': lastDataRow.getTimestamp(),
+                },
+            }
         }
 
     def postData(self):
         try:
-            url = "https://atman-iot.com/api/data-logger/data/id/{}/token/{}".format(self.dataLoggerId, self.dataLoggerToken)
-            json = self.asDict()
+            url = "https://things.eu-1.bosch-iot-suite.com/api/2/things/{}:{}/features".format(self.namespace, self.thing_name)
+            json = self.toDataFormat()
 
-            logger.info('Posting the following data to {}:\n{}'.format(url, pformat(json)))
-            response = requests.post(url, json=json)
+            logger.info('Putting the following data to {}:\n{}'.format(url, pformat(json)))
+            response = requests.put(url, json=json, auth=self.auth)
             response.raise_for_status()
 
         except HTTPError as e:

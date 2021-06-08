@@ -1,6 +1,6 @@
 # here we can write the code to upload the data to some persistence
 from ftplib import FTP
-from .api import Device, Channel, DataUnit, AtmanDataLogger
+from .api import Device, Channel, DataUnit, AtmanDataLogger, BoschDataLogger
 from logger import logger
 
 import os
@@ -26,9 +26,14 @@ def upload_data(sensorData, measurementPeriod, dataLoggerId, dataLoggerToken):
     dataLogger.withManufacturer(sensorData.getManufacturer()).withDevices([device])
     dataLogger.postData()
 
-def upload_data_bosch(sensorData):
+def upload_data_bosch(client_id, client_secret, scope,
+    namespace, thing_name, thing_feature, sensorData):
     if not sensorData.getData().values():
         logger.info('Not posting any data as we have no data to post. (bosch)')
         return
 
-
+    dataLogger = BoschDataLogger(client_id, client_secret, scope)
+    dataLogger.withNamespace(namespace).withThingName(thing_name)
+        .withThingFeature(thing_feature)
+        .withData(sensorData.getData().values())
+    dataLogger.postData()
