@@ -1,0 +1,9 @@
+for bosch, we should only send every minute
+and should only send the avg of every reading between the last
+sent reading and the current reading.
+
+
+next steps for me:
+- create a web server
+- create a little web ui for easy setup
+- change the reading frequency delivery for bosch

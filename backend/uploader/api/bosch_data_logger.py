@@ -4,29 +4,47 @@ from requests import RequestException, HTTPError
 from logger import logger
 from pprint import pformat
 
-class DataLogger():
+class BoschDataLogger():
 
-    def __init__(self, id, dataLoggerToken):
-        self.id = id
-        self.dataLoggerToken = dataLoggerToken
+    def __init__(self, client_id, client_secret, scope):
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.scope = scope
 
-    def withManufacturer(self, manufacturer):
-        self.manufacturer = manufacturer
+    def withThingName(self, thing_name):
+        self.thing_name = thing_name
         return self
 
-    def withDevices(self, devices):
-        self.devices = devices
+    def withThingFeature(self, thing_feature):
+        self.thing_feature = thing_feature
+
+    def withData(self, data):
+        self.data = data
         return self
 
-    def asDict(self):
+    def withAuth(self):
+        pass
+
+    def toDataFormat(self):
+        formattedData = {}
+        for dataRow in self.data:
+                formattedData[feature.getName()] = {
+                    'properties': {
+                        'temperature': feature.,
+                        'viscosity': '',
+                        'timestamp': '',
+                    },
+                }
+
         return {
+            self.
             'manufacturer': self.manufacturer,
             'devices': [ device.asDict() for device in self.devices ],
         }
 
     def postData(self):
         try:
-            url = "https://atman-iot.com/api/data-logger/data/id/{}/token/{}".format(self.id, self.dataLoggerToken)
+            url = "https://atman-iot.com/api/data-logger/data/id/{}/token/{}".format(self.dataLoggerId, self.dataLoggerToken)
             json = self.asDict()
 
             logger.info('Posting the following data to {}:\n{}'.format(url, pformat(json)))
