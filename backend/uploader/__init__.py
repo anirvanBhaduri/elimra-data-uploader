@@ -5,10 +5,7 @@ from logger import logger
 
 import os
 
-id = os.getenv('DATA_LOGGER_ID')
-dataLoggerToken = os.getenv('DATA_LOGGER_TOKEN')
-
-def upload_data(sensorData, measurementPeriod):
+def upload_data(sensorData, measurementPeriod, dataLoggerId, dataLoggerToken):
     channels = [
         Channel(name=sensorData.fields[0], unit=sensorData.getViscosityUnit(), dataUnits=[]),
         Channel(name=sensorData.fields[1], unit=sensorData.getTemperatureUnit(), dataUnits=[]),
@@ -25,6 +22,6 @@ def upload_data(sensorData, measurementPeriod):
         channels[0].addDataUnit(dataUnitViscosity)
         channels[1].addDataUnit(dataUnitTemperature)
 
-    dataLogger = DataLogger(id=id, dataLoggerToken=dataLoggerToken)
+    dataLogger = DataLogger(id=dataLoggerId, dataLoggerToken=dataLoggerToken)
     dataLogger.withManufacturer(sensorData.getManufacturer()).withDevices([device])
     dataLogger.postData()

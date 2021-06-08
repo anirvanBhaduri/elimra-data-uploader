@@ -26,7 +26,7 @@ function FormErrorMessage(message) {
   );
 }
 
-function theFormItself(onStop) {
+function theFormItself(onStop, disableStart, disableStop) {
   return function ({ isSubmitting }) {
     return (
       <Form>
@@ -40,7 +40,7 @@ function theFormItself(onStop) {
         <ErrorMessage name="sensorDataFileName" component={FormErrorMessage}/>
         <Field label="Sample Rate (in seconds): " name="sampleRateInSeconds"
                placeholder="Sample rate of readings in seconds"
-               component={FormInput} value={1}/>
+               component={FormInput} />
         <ErrorMessage name="sampleRateInSeconds" component={FormErrorMessage}/>
         <Field label="Data Logger ID: " name="dataLoggerId"
                placeholder="The Atman Data Logger ID" component={FormInput}/>
@@ -49,19 +49,19 @@ function theFormItself(onStop) {
                placeholder="The Atman Data Logger Token" component={FormInput}/>
         <ErrorMessage name="dataLoggerToken" component={FormErrorMessage}/>
         <div className="mr-4 inline-block">
-          <BlueButton type="submit" name="start" disabled={isSubmitting}
+          <BlueButton type="submit" name="start" disabled={isSubmitting || disableStart}
                       text="Start"/>
         </div>
         <div className="inline-block">
           <RedButton onClick={onStop} type="button" name="stop"
-                     disabled={isSubmitting} text="Stop"/>
+                     disabled={isSubmitting || disableStop} text="Stop"/>
         </div>
       </Form>
     );
   }
 }
 
-function AtmanContainer({ onStart, onStop }) {
+function AtmanContainer({ onStart, onStop, disableStart, disableStop }) {
   return (
     <div className="container mx-auto px-4 bg-gray-600 text-left rounded-md">
       <p className="text-white text-4xl">Atman</p>
@@ -74,14 +74,12 @@ function AtmanContainer({ onStart, onStop }) {
             dataLoggerToken: '',
           }}
           validate={formValidator}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(async () => {
-              await onStart(values);
-              setSubmitting(false);
-            }, 400);
+          onSubmit={async (values, { setSubmitting }) => {
+            await onStart(values);
+            setSubmitting(false);
           }}
         >
-          {theFormItself(onStop)}
+          {theFormItself(onStop, disableStart, disableStop)}
         </Formik>
         <div className="mt-4 pb-2">
           <LogDisplay />

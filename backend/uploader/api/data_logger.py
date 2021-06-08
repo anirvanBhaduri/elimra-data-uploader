@@ -13,7 +13,7 @@ class DataLogger():
     def withManufacturer(self, manufacturer):
         self.manufacturer = manufacturer
         return self
-    
+
     def withDevices(self, devices):
         self.devices = devices
         return self
@@ -32,7 +32,7 @@ class DataLogger():
             logger.info('Posting the following data to {}:\n{}'.format(url, pformat(json)))
             response = requests.post(url, json=json)
             response.raise_for_status()
-        
+
         except HTTPError as e:
             # log this first then rethrow
             logger.error('Failed to post data due to the following HTTPError: {}'.format(e))

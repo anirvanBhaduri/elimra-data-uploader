@@ -1,6 +1,6 @@
 amqp==5.0.6
 billiard==3.6.4.0
-celery==5.0.5
+celery==5.1.0
 certifi==2020.12.5
 chardet==4.0.0
 click==7.1.2
@@ -12,7 +12,7 @@ idna==2.10
 importlib-metadata==4.0.1
 itsdangerous==2.0.0
 Jinja2==3.0.0
-kombu==5.0.2
+kombu==5.1.0
 MarkupSafe==2.0.0
 prompt-toolkit==3.0.18
 python-dotenv==0.15.0
