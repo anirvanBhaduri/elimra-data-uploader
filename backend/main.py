@@ -52,4 +52,4 @@ def run_bosch(sensorDataFileName, sampleRateInSeconds,
             csvData)
 
         logger.debug('Sleeping for {} seconds with lastTimestamp at {}'.format(measurementPeriod, lastTimestamp))
-        time.sleep(measurementPeriod)
+        time.sleep(int(measurementPeriod))

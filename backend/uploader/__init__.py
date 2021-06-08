@@ -33,7 +33,5 @@ def upload_data_bosch(client_id, client_secret, scope,
         return
 
     dataLogger = BoschDataLogger(client_id, client_secret, scope)
-    dataLogger.withNamespace(namespace).withThingName(thing_name)
-        .withThingFeature(thing_feature)
-        .withData(sensorData.getData().values())
+    dataLogger.withNamespace(namespace).withThingName(thing_name).withThingFeature(thing_feature).withData(sensorData.getData().values())
     dataLogger.postData()

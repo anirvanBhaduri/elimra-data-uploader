@@ -47,12 +47,12 @@ def start_bosch():
         request_data.get('sensorDataFilePath'),
         request_data.get('sensorDataFileName'),
         request_data.get('sampleRateInSeconds'),
-        request_data.get('client_id'),
-        request_data.get('client_secret'),
+        request_data.get('clientId'),
+        request_data.get('clientSecret'),
         request_data.get('scope'),
         request_data.get('namespace'),
-        request_data.get('thing_name'),
-        request_data.get('thing_feature'),
+        request_data.get('thingName'),
+        request_data.get('thingFeature'),
     ), task_id=bosch_task_id)
     return 'Successfully started task', 200
 

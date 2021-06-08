@@ -21,6 +21,7 @@ class BoschDataLogger():
 
     def withThingFeature(self, thing_feature):
         self.thing_feature = thing_feature
+        return self
 
     def withData(self, data):
         self.data = data
@@ -28,7 +29,7 @@ class BoschDataLogger():
 
     def toDataFormat(self):
         formattedData = {}
-        lastDataRow = self.data[-1]
+        lastDataRow = list(self.data)[-1]
 
         return {
             self.thing_feature: {

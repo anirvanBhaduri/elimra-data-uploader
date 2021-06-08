@@ -17,7 +17,7 @@ def get_auth_token(client_id, client_secret, scope):
         })
         response.raise_for_status()
         response_json = response.json()
-        return (response_json.token_type, response_json.access_token)
+        return response_json.get('token_type'), response_json.get('access_token')
     except HTTPError as e:
             # log this first then rethrow
         logger.error('Failed to acquire bosch auth token due to the following HTTPError: {}'.format(e))
