@@ -77,28 +77,10 @@ The following section contains information about how to install this software.
 
 In order to run this application, you must first download the following:
 
-* python
-  Please download the following version of Python - `Python 3.9.1 amd 64` (Windows)
-  Here is the link: `https://www.python.org/ftp/python/3.9.1/python-3.9.1-amd64.exe`
-  And then execute the downloaded file.
-
-* pip
-  To install this, please type the following commands in the command line: (Windows)
-  ```sh
-  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-  py get-pip.py
-  ```
-
-* virtualenv
-  Now you must navigate to where pip is installed by using the following command:
-  ```sh
-  cd {The path where pip was installed}
-  ```
-  and then run the following command:
-  ```sh
-  .\pip.exe install virtualenv
-  ```
-
+* docker desktop (windows)
+  Please download Docker from the following website: https://docs.docker.com/docker-for-windows/install/
+  You will need to install Docker and also ensure virtualisation is turned on for your PC.
+  You can read here to learn how to enable virtualisation - https://mashtips.com/enable-virtualization-windows-10/
 
 ### Installation
 
@@ -106,19 +88,68 @@ In order to run this application, you must first download the following:
    ```sh
    git clone git@github.com:anirvanBhaduri/elimra-data-uploader.git 
    ```
-2. Open a file explorer and navigate to the folder which you just downloaded (elimra-data-uploader). Then run the `Setup.bat` file by double-clicking it.
-3. Step 2 will have created a `.env` file. Open this file with some editor and change the values within to appropriate values. The values inside this file
-   will determine if the application runs correctly.
-4. Once you have correctly populated the `.env` file, double-click the `Run.bat` file. This will run the application.
-5. To see logs, go to `logger/logs`.
+### Execution
 
+You can then run the project from the root of the git repository using
+```sh
+docker-compose up
+```
+Once the containers have been successfully booted, visit `localhost:5000`
+on a browser of your choice to use the software.
 
+### Useful links
+* [Postman](https://www.postman.com/)
+* [Bosch](https://bosch-iot-insights.com/static-contents/docu/html/Data-Ingestion-and-Visualization.html)
+You can also use these youtube links for more info:
+https://www.youtube.com/watch?v=uQEeE0_JIdY
+https://www.youtube.com/watch?v=gvcmB2xvHKo
+
+## Using the interface
+
+The project has an interface that exposes the two data loggers it currently 
+supports. One is `ATMAN` and the other is `BOSCH`.
+
+### ATMAN
+ATMAN requires the following:
+* sensor data file path: this file path should be /opt/apps/backend/samples/
+* sensor data filename: this is the name of the file with the extension.
+* sample rate: this is how often the software reads the sensor data file
+and sends the new info to ATMAN
+* Data logger ID: this is ID given by ATMAN for the sensor which is being recorded
+* Data Logger Token: this is the token used to post data to ATMAN (authentication)
+The sensor data file should be placed inside `/opt/apps/backend/samples/` 
+to ensure the software works correctly.
+
+### BOSCH
+BOSCH requires the following:
+* sensor data file path: this file path should be /opt/apps/backend/samples/
+* sensor data filename: this is the name of the file with the extension.
+* sample rate: this is how often the software reads the sensor data file
+* client ID: this comes from bosch and is used for authentication before sending data
+* client secret: this comes from bosch and is used for authentication before sending data
+* auth scope: this comes from bosch and is used for authentication before sending data
+* Things namespace: this is the name of the namespace within your bosch `things` subscription
+* Thing name: the name of the thing is the digital twin of the sensor which is registered within bosch things
+* Thing feature name: this is the name of the feature for which we are providing data to bosch
+The sensor data file should be placed inside `/opt/apps/backend/samples/` 
+to ensure the software works correctly.
+
+NOTE: the `Things namespace`, `Thing name` and `Thing feature name` must all
+be setup on Bosch IOT before using this software. The software WILL NOT 
+work if the setup is wrong or if the value provided does not match what was
+registered in Bosch IOT.
+
+### Start, Stop
+Once the information for ATMAN or BOSCH has been setup, you can run it
+using the `Start` button under the respective section. ATMAN and BOSCH can be
+run simultaneously or separately. You can press `Stop` under the respective 
+section to then stop the execution of the software for that section.
 
 <!-- ROADMAP -->
 ## Roadmap
 
-TBA
-
+TODO: next feature to build is the live logging on the localhost:5000/ page.
+This will require the use of websockets.
 
 
 <!-- CONTACT -->
