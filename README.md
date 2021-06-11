@@ -100,9 +100,10 @@ on a browser of your choice to use the software.
 ### Useful links
 * [Postman](https://www.postman.com/)
 * [Bosch](https://bosch-iot-insights.com/static-contents/docu/html/Data-Ingestion-and-Visualization.html)
+
 You can also use these youtube links for more info:
-https://www.youtube.com/watch?v=uQEeE0_JIdY
-https://www.youtube.com/watch?v=gvcmB2xvHKo
+* https://www.youtube.com/watch?v=uQEeE0_JIdY
+* https://www.youtube.com/watch?v=gvcmB2xvHKo
 
 ## Using the interface
 
