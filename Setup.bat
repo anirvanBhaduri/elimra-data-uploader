@@ -1,4 +1,4 @@
 @echo off
 echo "Setting up the application"
-cmd /k "py -m virtualenv .virtualenv & .\.virtualenv\Scripts\activate & COPY .env.sample .env & .\.virtualenv\Scripts\pip.exe install -r requirements.txt"
+cmd /k "cd frontend & docker run -w=/app --volume=$(pwd)/:/app node:alpine npm install & docker run -w=/app --volume=$(pwd)/:/app node:alpine npm run build"
 ex-m virtualenv

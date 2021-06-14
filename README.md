@@ -110,6 +110,10 @@ You can also use these youtube links for more info:
 The project has an interface that exposes the two data loggers it currently 
 supports. One is `ATMAN` and the other is `BOSCH`.
 
+## Sample File format
+Please see the format of the `sample1.csv` file found in the `backend/samples/`
+folder to see how the sensor data file format should be.
+
 ### ATMAN
 ATMAN requires the following:
 * sensor data file path: this file path should be /opt/apps/backend/samples/
@@ -118,7 +122,8 @@ ATMAN requires the following:
 and sends the new info to ATMAN
 * Data logger ID: this is ID given by ATMAN for the sensor which is being recorded
 * Data Logger Token: this is the token used to post data to ATMAN (authentication)
-The sensor data file should be placed inside `/opt/apps/backend/samples/` 
+
+The sensor data file should be placed inside {project root}/backend/samples/` 
 to ensure the software works correctly.
 
 ### BOSCH
@@ -132,7 +137,8 @@ BOSCH requires the following:
 * Things namespace: this is the name of the namespace within your bosch `things` subscription
 * Thing name: the name of the thing is the digital twin of the sensor which is registered within bosch things
 * Thing feature name: this is the name of the feature for which we are providing data to bosch
-The sensor data file should be placed inside `/opt/apps/backend/samples/` 
+
+The sensor data file should be placed inside `{project root}/backend/samples/` 
 to ensure the software works correctly.
 
 NOTE: the `Things namespace`, `Thing name` and `Thing feature name` must all

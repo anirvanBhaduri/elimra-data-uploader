@@ -1,5 +1,5 @@
 @echo off
-echo "Running the application. Please do not close this command prompt!"
+echo "Running the application"
 echo "Go to .\logger\logs to see the logs."
-cmd /k ".\.virtualenv\Scripts\activate & py main.py"
-pause
+cmd /k "docker-compose up -d"
+start "" http://localhost:5000
