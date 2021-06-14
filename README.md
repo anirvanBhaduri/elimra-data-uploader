@@ -87,15 +87,14 @@ In order to run this application, you must first download the following:
 1. Download the repo as a zip file or clone it using the below command. If you download it as a zip, you need to unzip it somewhere.
    ```sh
    git clone git@github.com:anirvanBhaduri/elimra-data-uploader.git 
+2. Open a file viewer and navigate to the just cloned folder. Then double
+click the `Setup.bat` file. Let this run and complete.
    ```
 ### Execution
 
-You can then run the project from the root of the git repository using
-```sh
-docker-compose up
-```
-Once the containers have been successfully booted, visit `localhost:5000`
-on a browser of your choice to use the software.
+Open a file viewer and navigate to the root of the git repository and
+then double click the `Run.bat` file. This will start the program and
+open a web browser page pointing to `http://localhost:5000`.
 
 ### Useful links
 * [Postman](https://www.postman.com/)
