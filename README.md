@@ -117,7 +117,9 @@ In order to run this application, you must first download the following:
 <!-- ROADMAP -->
 ## Roadmap
 
-TBA
+Update code to run using node.
+Change frontend to simply store the config as a json file upon submit.
+Run the backend atman or bosch process using the command line (or a bat file).
 
 
 
