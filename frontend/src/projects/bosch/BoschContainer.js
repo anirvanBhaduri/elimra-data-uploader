@@ -62,11 +62,7 @@ function theFormItself(onStop, disableStart, disableStop) {
         <ErrorMessage name="thingFeature" component={FormErrorMessage}/>
         <div className="mr-4 inline-block">
           <BlueButton type="submit" name="start" disabled={isSubmitting || disableStart}
-                      text="Start"/>
-        </div>
-        <div className="inline-block">
-          <RedButton onClick={onStop} type="button" name="stop"
-                     disabled={isSubmitting || disableStop} text="Stop"/>
+                      text="Save Config"/>
         </div>
       </Form>
     );
@@ -98,7 +94,6 @@ function BoschContainer({ onStart, onStop, disableStart, disableStop }) {
           {theFormItself(onStop, disableStart, disableStop)}
         </Formik>
         <div className="mt-4 pb-2">
-          <LogDisplay />
         </div>
     </div>
   );
