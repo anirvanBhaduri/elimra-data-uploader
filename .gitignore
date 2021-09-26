@@ -135,3 +135,5 @@ logger/logs/info*
 .vs
 
 .idea
+
+node_modules
