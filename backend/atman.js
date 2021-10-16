@@ -1,7 +1,7 @@
-const path = require('path');
+const logger = require('./modules/logger').logger;
 const extractSensorDataFromCSV = require('./modules/extractor').extractSensorDataFromCSV;
 
 (async () => {
     const sensorData = await extractSensorDataFromCSV('./samples/sample1.csv');
-    console.log(sensorData.getData());
+    logger.log(JSON.stringify(sensorData.getData()));
 })();
