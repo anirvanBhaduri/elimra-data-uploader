@@ -21,11 +21,9 @@ class CSVReader {
                     this.rows.push(row);
                 })
                 .on('end', () => {
-                    console.log('CSV file successfully processed');
                     resolve();
                 });
             } catch (e) {
-                console.error('[csvReader]', e);
                 reject(new Error(`Looks like the file format is incorrect! 
                     Please check you are using the correct sensor data csv file format`
                 ));
@@ -80,7 +78,7 @@ class CSVReader {
             return this;
         }
 
-        fromDateTime = Date.parse(fromTimestamp, TIMESTAMP_FORMAT);
+        const fromDateTime = Date.parse(fromTimestamp);
 
         dataRows.map((row) => {
             let currentTime = Date.parse(row[0], TIMESTAMP_FORMAT);
@@ -110,6 +108,8 @@ class CSVReader {
         const timestampsInDatetime = timestamps.map(timestamp => {
             return Date.parse(timestamp, TIMESTAMP_FORMAT);
         });
+
+        return new Date(Math.max(...timestampsInDatetime)).toISOString();
     }
 
     getViscosityUnit() {

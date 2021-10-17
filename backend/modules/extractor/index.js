@@ -15,8 +15,13 @@ const extractSensorDataFromCSV = async (filename, lastTimestamp) => {
     return csv;
 }
 
+const extractAtmanConfig = () => require('../../config/atman-run-config.json');
+const extractBoschConfig = () => require('../../config/bosch-run-config.json');
+
 module.exports = {
     CSVReader,
     DataRow,
     extractSensorDataFromCSV,
+    extractAtmanConfig,
+    extractBoschConfig,
 };

@@ -1,4 +1,3 @@
-
 const logger = require('simple-logger-node').config({
     // where to save logs
     file: __dirname + '/logs/info.log',
@@ -11,7 +10,9 @@ const logger = require('simple-logger-node').config({
 
     // formatting the logged message
     format: message => {
-        return `[INFO] [${new Date}] - ${message.trim()}\n`
+        const formattedMessage = `[INFO] [${new Date}] - ${message.trim()}\n`;
+        console.log(formattedMessage);
+        return formattedMessage;
     },
 });
 
