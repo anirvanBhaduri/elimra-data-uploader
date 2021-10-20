@@ -64,7 +64,7 @@ display sensor data.
 
 ### Built With
 
-* [Python](https://www.python.org/)
+* [Nodejs](https://nodejs.org/en/)
 
 
 
@@ -77,50 +77,28 @@ The following section contains information about how to install this software.
 
 In order to run this application, you must first download the following:
 
-* python
-  Please download the following version of Python - `Python 3.9.1 amd 64` (Windows)
-  Here is the link: `https://www.python.org/ftp/python/3.9.1/python-3.9.1-amd64.exe`
-  And then execute the downloaded file.
-
-* pip
-  To install this, please type the following commands in the command line: (Windows)
-  ```sh
-  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-  py get-pip.py
-  ```
-
-* virtualenv
-  Now you must navigate to where pip is installed by using the following command:
-  ```sh
-  cd {The path where pip was installed}
-  ```
-  and then run the following command:
-  ```sh
-  .\pip.exe install virtualenv
-  ```
+* node
+  You can download it here: https://nodejs.org/en/download/
 
 
-### Installation
+### Installing and Running the application
 
 1. Download the repo as a zip file or clone it using the below command. If you download it as a zip, you need to unzip it somewhere.
    ```sh
    git clone git@github.com:anirvanBhaduri/elimra-data-uploader.git 
    ```
 2. Open a file explorer and navigate to the folder which you just downloaded (elimra-data-uploader). Then run the `Setup.bat` file by double-clicking it.
-3. Step 2 will have created a `.env` file. Open this file with some editor and change the values within to appropriate values. The values inside this file
-   will determine if the application runs correctly.
-4. Once you have correctly populated the `.env` file, double-click the `Run.bat` file. This will run the application.
-5. To see logs, go to `logger/logs`.
+3. After about 2 min, go to a browser and open up the following url: `localhost:3000`
+4. Fill out the forms you see in the UI and click the `Save Config` buttons for each form when done.
+5. Upon completing the forms and saving the config, run the `Run Atman.bat` and/or `Run Bosch.bat` file.
+6. To see logs, go to `logger/logs`.
 
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-Update code to run using node.
-Change frontend to simply store the config as a json file upon submit.
-Run the backend atman or bosch process using the command line (or a bat file).
-
+Support OPC UA.
 
 
 <!-- CONTACT -->
