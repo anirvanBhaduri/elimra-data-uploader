@@ -11,7 +11,7 @@ const getBoschAuthToken = async (clientId, clientSecret, scope) => {
             'client_secret': clientSecret,
             'scope': scope,
         });
-        // TODO: figure out how to extract token from response ('token_type', 'access_token')
+        return `${response.data.token_type} ${response.data.access_token}`;
     } catch (e) {
         logger.log(`Failed to get Bosch Auth token due to the following error: ${JSON.stringify(e, null, 2)}`);
         throw e;

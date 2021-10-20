@@ -9,7 +9,7 @@ class BoschUploader {
         this.client.interceptors.request.use(
             async config => {
                 config.headers = { 
-                    'Authorization': this.authHeader,
+                    'Authorization': await getBoschAuthToken(clientId, clientSecret, scope),
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 }
@@ -26,7 +26,6 @@ class BoschUploader {
                 const originalRequest = error.config;
                 if (error.response.status === 403 && !originalRequest._retry) {
                     originalRequest._retry = true;
-                    // TODO fix this
                     this.authHeader = await getBoschAuthToken(clientId, clientSecret, scope);            
                     axios.defaults.headers.common['Authorization'] = this.authHeader;
                     return this.client(originalRequest);
@@ -74,7 +73,7 @@ class BoschUploader {
             const url = `https://things.eu-1.bosch-iot-suite.com/api/2/things/${this.namespace}:${this.thingName}/features`;
             const body = this.toRequestFormat();
 
-            logger.log(`Putting the following data to ${this.url}:\n\n${JSON.stringify(body, null, 2)}`);
+            logger.log(`Putting the following data to ${url}:\n\n${JSON.stringify(body, null, 2)}`);
             await this.client.put(url, body);
             logger.log('Successfully posted data to Bosch');
         } catch (e) {
