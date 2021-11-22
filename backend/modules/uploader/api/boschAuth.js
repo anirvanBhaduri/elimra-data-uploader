@@ -5,12 +5,19 @@ const getBoschAuthToken = async (clientId, clientSecret, scope) => {
     const url = 'https://access.bosch-iot-suite.com/token';
 
     try {
-        const response = await axios.post(url, {
-            'grant_type': 'client_credentials',
-            'client_id': clientId,
-            'client_secret': clientSecret,
-            'scope': scope,
-        });
+        const params = new URLSearchParams();
+        params.append('grant_type', 'client_credentials');
+        params.append('client_id', clientId);
+        params.append('client_secret', clientSecret);
+        params.append('scope', scope);
+
+        const config = {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        };
+
+        const response = await axios.post(url, params, config);
         return `${response.data.token_type} ${response.data.access_token}`;
     } catch (e) {
         logger.log(`Failed to get Bosch Auth token due to the following error: ${JSON.stringify(e, null, 2)}`);
